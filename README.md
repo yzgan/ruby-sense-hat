@@ -20,14 +20,14 @@ I prefer working with Ruby, so here's a Ruby interface for the raspberry-pi sens
     [x] scroll text
     
     ### Environment
-    [ ] humidity  
-    [ ] temp from humidity  
-    [ ] pressure  
-    [ ] temp from pressure  
+    [x] humidity  
+    [x] temp from humidity  
+    [x] pressure  
+    [x] temp from pressure  
 
     ### IMU Sensor
-    [ ] compass  
-    [ ] gyro  
+    [x] compass
+    [x] gyro
     [ ] acceleration
 
     ### Inputs
@@ -159,6 +159,47 @@ stick.finish_register_inputs
 You can check for thread spanwed and all available thread command can be found on official [Ruby Thread](https://ruby-doc.org/3.2.2/Thread.html) documentation.
 ```rb
 stick.thread
+```
+
+## Environment
+Initialize IMU sensor and default configuration.
+```rb
+sense = SenseHat::Imu.new
+```
+### Humidity
+```rb
+sense.get_humidity
+=> {:humidity=>40.155818939208984, :units=>{:humidity=>:percentage}}
+```
+
+### Pressure
+```rb
+sense.get_pressure
+{:pressure=>1007.88134765625, :units=>{:pressure=>:mbar}}
+```
+### Temperature from humidity
+```rb
+sense.get_temperature # or
+sense.get_temperature_from_humidity
+=> {:temperature=>45.951908111572266, :units=>{:temperature=>:celsius}}
+```
+### Temperature from pressure
+```rb
+sense.get_temperature_from_pressure
+=> {:temperature=>43.86249923706055, :units=>{:temperature=>:celsius}}
+```
+
+## IMU sensor
+### compass
+Gets the direction of North from the orientation in degrees.
+```rb
+sense.get_compass
+=> 342.2526840549963
+```
+### gyro
+```rb
+sense.get_gyro
+=> {:r=>-0.18688294031483452, :p=>1.0562972928789345, :y=>-0.32630921934831797, :units=>{:r=>:degree, :p=>:degree, :y=>:degree}}
 ```
 
 ## Development
